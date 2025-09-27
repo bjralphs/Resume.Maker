@@ -1,0 +1,35 @@
+# resume_gui/widgets/scrollable.py
+import tkinter as tk
+from tkinter import ttk
+
+class ScrollableFrame(ttk.Frame):
+    def __init__(self, container, *args, **kwargs):
+        super().__init__(container, *args, **kwargs)
+        self.canvas = tk.Canvas(self, highlightthickness=0)
+        vbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=vbar.set)
+
+        self.scrollable_frame = ttk.Frame(self.canvas)
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+
+        self.canvas_window = self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        self.canvas.bind("<Configure>", lambda e: self.canvas.itemconfigure(self.canvas_window, width=e.width))
+
+        self.canvas.pack(side="left", fill="both", expand=True)
+        vbar.pack(side="right", fill="y")
+
+        # mouse wheel
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)   # Win/Mac
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel)     # Linux
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel)
+
+    def _on_mousewheel(self, event):
+        if event.num == 4:      # Linux up
+            self.canvas.yview_scroll(-1, "units")
+        elif event.num == 5:    # Linux down
+            self.canvas.yview_scroll(1, "units")
+        else:                   # Win/Mac
+            self.canvas.yview_scroll(int(-event.delta/120), "units")
