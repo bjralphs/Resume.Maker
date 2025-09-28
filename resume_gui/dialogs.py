@@ -18,10 +18,13 @@ def skill_dialog(root, value=""):
     return _simple_input_dialog(root, "Skill", "Skill", value)
 
 def experience_dialog(root, e=None):
-    win = Toplevel(root); win.title("Experience"); win.grab_set()
+    win = Toplevel(root); win.title("Experience"); 
+    win.geometry("600x400")
+    win.resizable(True, True)
+    win.grab_set()
     fields = {k: StringVar(value=(e or {}).get(k,"")) for k in ["role","company","start","end","location","blurb"]}
     for label, key in [("Role","role"), ("Company","company"), ("Start (e.g., Jan 2022)","start"),
-                       ("End (e.g., Present)","end"), ("Location","location"), ("One-line blurb (optional)","blurb")]:
+                       ("End (e.g., Jan 2023, Present)","end"), ("Location — (Remote/Hybrid/In-Person)","location"), ("One-line blurb (optional)","blurb")]:
         Label(win, text=label).pack(anchor="w"); Entry(win, textvariable=fields[key]).pack(fill="x")
 
     Label(win, text="Highlights (one per line)").pack(anchor="w")
@@ -40,7 +43,10 @@ def experience_dialog(root, e=None):
     return out if out else None
 
 def education_dialog(root, ed=None):
-    win = Toplevel(root); win.title("Education"); win.grab_set()
+    win = Toplevel(root); win.title("Education"); 
+    win.geometry("600x400")
+    win.resizable(True, True)
+    win.grab_set()
     fields = {k: StringVar(value=(ed or {}).get(k,"")) for k in ["degree","school","start","end","location","details"]}
     for label, key in [("Degree","degree"), ("School","school"), ("Start (e.g., 2019)","start"),
                        ("End (e.g., 2023 or Present)","end"), ("Location","location"), ("Details","details")]:
@@ -55,7 +61,10 @@ def education_dialog(root, ed=None):
     return out if out else None
 
 def project_dialog(root, p=None):
-    win = Toplevel(root); win.title("Project"); win.grab_set()
+    win = Toplevel(root); win.title("Project"); 
+    win.geometry("600x400")
+    win.resizable(True, True)
+    win.grab_set()
     fields = {k: StringVar(value=(p or {}).get(k,"")) for k in ["name","link","description"]}
     for label, key in [("Name","name"), ("Link","link"), ("Description (one line)","description")]:
         Label(win, text=label).pack(anchor="w"); Entry(win, textvariable=fields[key]).pack(fill="x")

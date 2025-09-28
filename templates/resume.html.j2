@@ -4,33 +4,37 @@
   <meta charset="utf-8">
   <title>{{ personal.name }} - Resume</title>
   <style>
-  @page { size: A4; margin: 14mm 12mm; }
-    body { font-family: Arial, sans-serif; }
-    h2 { page-break-after: avoid; }
+  @page { size: A4; margin: 10mm 10mm; }
+    h2 { page-break-after: avoid; margin-left: 6pt;}
+    h2 + hr { margin-top: -10pt; }
     .item { page-break-inside: avoid; }
-
-    body { font-family: Arial, sans-serif; margin: 40px; }
-    h1 { margin-bottom: 0; }
-    .contact { color: #555; margin-top: 4px; }
-    .section { margin-top: 24px; }
-    .item { margin-bottom: 12px; }
+    body { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; margin: 30px; letter-spacing: 0.25pt; line-spacing: 1.5pt;}
+    h1 { margin-bottom: 2pt; margin-left: 6pt; font-size:48px;}
+    .contact { color: #000000; margin-top: 2px; margin-left: 6pt;}
+    .section { margin-top: 10px; }
+    p { margin-top: -2px; margin-left: 6pt; }
+    .item { margin-bottom: 12px; margin-left: 6pt; }
     .title { font-weight: bold; }
-    .meta { color: #666; font-size: 0.95em; }
+    .meta { color: #000000; font-size: 0.95em; font-style: italic; }
     ul { margin: 6px 0 0 18px; }
-    .skills span { margin-right: 8px; }
-    hr { border: none; border-top: 2px solid #000000; margin: 3pt 0 10pt 0; }
-  </style>
+    .skills span { text-align: left; margin-right: 5px; }
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6pt 10pt; margin-left: 6pt; }
+    hr { border: none; border-bottom: 0.5px solid #000000; margin: 0pt 0 4pt 0; }
+    .experience-row { display: flex; align-items: baseline; justify-content: space-between;  gap: 1rem; }
+    .experience-row .title { font-weight: bold; }
+    .experience-row .dates { white-space: nowrap; font-weight: normal; }
+      </style>
 </head>
 <body>
   <h1>{{ personal.name }}</h1>
   <hr>
   <div class="contact">
-    {{ personal.email }} · {{ personal.phone }} · {{ personal.location }}
+    {{ personal.location }} | {{ personal.phone }} | {{ personal.email }} | {{ personal.linkedin }}
   </div>
 
   {% if summary %}
   <div class="section">
-    <h2>Objective</h2>
+    <h2>OBJECTIVE</h2>
     <hr>
     <p>{{ summary }}</p>
   </div>
@@ -40,12 +44,15 @@
 
   {% if experience %}
   <div class="section">
-    <h2>Professional Experience</h2>
+    <h2>PROFESSIONAL EXPERIENCE</h2>
     <hr>
     {% for e in experience %}
       <div class="item">
-        <div class="title">{{ e.role }} — {{ e.company }}</div>
-        <div class="meta">{{ e.start }} – {{ e.end }}{% if e.location %} · {{ e.location }}{% endif %}</div>
+        <div class="experience-row">
+          <span class="title">{{ e.role }}</span>
+          <span class="dates">{{ e.start }} – {{ e.end }}</span>
+        </div>
+        <div class="meta">{{ e.company }} — {% if e.location %}{{ e.location }}{% endif %}</div>
         {% if e.highlights %}
           <ul>
             {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
@@ -58,12 +65,20 @@
 
   {% if projects %}
   <div class="section">
-    <h2>Recent Projects</h2>    
+    <h2>RECENT PROJECTS</h2>
+    <hr>
     {% for p in projects %}
       <div class="item">
         <div class="title">{{ p.name }}</div>
         {% if p.link %}<div class="meta">{{ p.link }}</div>{% endif %}
         <div>{{ p.description }}</div>
+        {% if p.bullets and p.bullets|length %}
+          <ul>
+            {% for b in p.bullets %}
+              <li>{{ b }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
       </div>
     {% endfor %}
   </div>
@@ -71,7 +86,7 @@
 
   {% if skills %}
     <div class="section">
-      <h2>Skills</h2>
+      <h2>SKILLS</h2>
       <hr>
       <div class="skills">
         {% for s in skills %}<span>• {{ s }}</span>{% endfor %}
@@ -81,12 +96,15 @@
 
   {% if education %}
   <div class="section">
-    <h2>Education</h2>
+    <h2>EDUCATION</h2>
     <hr>
     {% for ed in education %}
       <div class="item">
-        <div class="title">{{ ed.degree }} — {{ ed.school }}</div>
-        <div class="meta">{{ ed.start }} – {{ ed.end }}{% if ed.location %} · {{ ed.location }}{% endif %}</div>
+        <div class="experience-row">
+          <span class="title">{{ ed.degree }}</span>
+          <span class="dates">{% if start %}{{ ed.start }} – {% endif %}{{ ed.end }}</span>
+        </div>
+        <div class="meta">{{ ed.school }} — {% if ed.location %}{{ ed.location }}{% endif %}</div>
         {% if ed.details %}<div>{{ ed.details }}</div>{% endif %}
       </div>
     {% endfor %}

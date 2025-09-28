@@ -7,7 +7,7 @@ from .services.paths import APP_TITLE
 def run():
     root = Tk()
     root.title(APP_TITLE)
-    root.geometry("900x720")      # set size here
+    root.geometry("900x800")      # set size here
     root.minsize(760, 520)
 
     view = MainView(root)         # build the UI
