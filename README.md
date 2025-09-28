@@ -253,12 +253,6 @@ This is roughly what gets saved/loaded (see `_collect()` in the controller):
 
 ---
 
-## 📜 License
-
-Choose a license (MIT/Apache‑2.0/etc.) and add it here.
-
----
-
 ## 🙌 Acknowledgments
 
 * Built with Tkinter, Jinja2, and WeasyPrint.
