@@ -19,7 +19,7 @@ def skill_dialog(root, value=""):
 
 def experience_dialog(root, e=None):
     win = Toplevel(root); win.title("Experience"); 
-    win.geometry("600x400")
+    win.geometry("1800x600")
     win.resizable(True, True)
     win.grab_set()
     fields = {k: StringVar(value=(e or {}).get(k,"")) for k in ["role","company","start","end","location","blurb"]}
@@ -44,7 +44,7 @@ def experience_dialog(root, e=None):
 
 def education_dialog(root, ed=None):
     win = Toplevel(root); win.title("Education"); 
-    win.geometry("600x400")
+    win.geometry("1800x600")
     win.resizable(True, True)
     win.grab_set()
     fields = {k: StringVar(value=(ed or {}).get(k,"")) for k in ["degree","school","start","end","location","details"]}
@@ -62,7 +62,7 @@ def education_dialog(root, ed=None):
 
 def project_dialog(root, p=None):
     win = Toplevel(root); win.title("Project"); 
-    win.geometry("600x400")
+    win.geometry("1800x600")
     win.resizable(True, True)
     win.grab_set()
     fields = {k: StringVar(value=(p or {}).get(k,"")) for k in ["name","link","description"]}
