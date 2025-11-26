@@ -12,7 +12,7 @@
     h1 { margin-bottom: 2pt; margin-left: 6pt; font-size:48px;}
     .contact { color: #000000; margin-top: 2px; margin-left: 6pt;}
     .section { margin-top: 10px; }
-    p { margin-top: -2px; margin-left: 6pt; }
+    p { margin-top: -1px; margin-left: 6pt; }
     .item { margin-bottom: 12px; margin-left: 6pt; }
     .title { font-weight: bold; }
     .meta { color: #000000; font-size: 0.95em; font-style: italic; }
@@ -23,6 +23,7 @@
     .experience-row { display: flex; align-items: baseline; justify-content: space-between;  gap: 1rem; }
     .experience-row .title { font-weight: bold; }
     .experience-row .dates { white-space: nowrap; font-weight: normal; }
+    .experience-highlights li + li { margin-top: 4px; }
       </style>
 </head>
 <body>
@@ -54,7 +55,7 @@
         </div>
         <div class="meta">{{ e.company }} — {% if e.location %}{{ e.location }}{% endif %}</div>
         {% if e.highlights %}
-          <ul>
+          <ul class="experience-highlights">
             {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
           </ul>
         {% endif %}
