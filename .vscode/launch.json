@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run main.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "console": "integratedTerminal",
+      "env": {
+        "WEASYPRINT_DLL_DIRECTORIES": "D:\\Applications\\GTK3\\GTK3-Runtime Win64\\bin",
+        "PATH": "D:\\Applications\\GTK3\\GTK3-Runtime Win64\\bin;${env:PATH}"
+      }
+    }
+  ]
+}
